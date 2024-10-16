@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     tierra.vm.hostname = "tierra.sistema.test"
 
     tierra.vm.provision "shell", inline: <<-SHELL
-      echo "Configurando Tierra..."
+      echo "Configurando esta Tierra..."
       
     SHELL
   end
