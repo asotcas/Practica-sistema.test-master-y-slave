@@ -22,3 +22,4 @@ Vagrant.configure("2") do |config|
     marte.vm.network "private_network", ip: "192.168.57.104"
   end
 end
+
