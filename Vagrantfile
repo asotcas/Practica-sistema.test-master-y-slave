@@ -1,17 +1,16 @@
 Vagrant.configure("2") do |config|
-  # Configuración del servidor DNS maestro
+ 
   config.vm.define "dns_master" do |master|
     master.vm.box = "debian/buster64"
     master.vm.network "private_network", ip: "192.168.57.101"
   end
 
-  # Configuración del servidor DNS esclavo
+  
   config.vm.define "dns_slave" do |slave|
     slave.vm.box = "debian/buster64"
     slave.vm.network "private_network", ip: "192.168.57.102"
   end
 
-  # Configuración de otros equipos (puedes añadir más según sea necesario)
   config.vm.define "venus" do |venus|
     venus.vm.box = "debian/buster64"
     venus.vm.network "private_network", ip: "192.168.57.103"
