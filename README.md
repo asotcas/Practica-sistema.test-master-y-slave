@@ -74,14 +74,14 @@ Dentro del archivo, en la sección options, agrega o modifica la línea correspo
 
 options {
     ...
-    dnssec-validation yes;  # Habilita la validación DNSSEC
+    dnssec-validation yes;  
     ...
 }; 
 
 3. 
 Para permitir que los servidores DNS realicen consultas recursivas únicamente para los ordenadores en las redes 127.0.0.0/8 y 192.168.57.0/24, puedes utilizar la opción de listas de control de acceso (ACL) en la configuración de Bind9.
 
-Dentro del archivo, agrega una sección para las ACLs antes de la sección options. Aquí puedes definir las redes que tendrán acceso a las consultas recursivas. El contenido podría verse así:
+Dentro del archivo, agrega una sección para las ACLs antes de la sección options.
 
 bash
 
@@ -100,6 +100,7 @@ options {
 4. 
 ara configurar el servidor maestro como tierra.sistema.test y asegurarte de que tenga autoridad sobre la zona directa e inversa, debes realizar algunas modificaciones en la configuración de Bind9. 
 Dentro de /etc/bind/named.conf.local,configuramos:
+
 // Zona directa
 zone "sistema.test" {
     type master;  
@@ -140,7 +141,7 @@ Asegúrate de que el archivo tenga el siguiente contenido y que negative-cache T
 
 7. 
 En el servidor maestro (tierra.sistema.test), abre el archivo de configuración de Bind9 (/etc/bind/named.conf.options). 
-Dentro del archivo, asegúrate de que la sección options contenga las siguientes directivas para reenviar las consultas no autorizadas al DNS de OpenDNS (208.67.222.222).
+Dentro del archivo,  la sección options debe contener las siguientes directivas para reenviar las consultas no autorizadas al DNS de OpenDNS (208.67.222.222).
 
 8. 
 Para configurar alias en Bind9, puedes usar registros CNAME en los archivos de zona.
@@ -150,7 +151,8 @@ Para configurar el alias mail.sistema.test como un CNAME de marte.sistema.test.
 Agrega el registro CNAME para el alias mail.sistema.test al final del archivo /etc/bind/db.sistema.test.
 mail    IN      CNAME   marte.sistema.test
 10. 
-Para configurar marte.sistema.test como el servidor de correo para el dominio sistema.test, necesitas agregar un registro MX (Mail Exchange) en el archivo de zona del dominio en el servidor DNS maestro (tierra.sistema.test). Este registro indica a otros servidores de correo electrónico que los correos dirigidos a @sistema.test deben ser manejados por el servidor marte.sistema.test.
+Para configurar marte.sistema.test como el servidor de correo para el dominio sistema.test, necesitas agregar un registro MX (Mail Exchange) en el archivo de zona del dominio en el servidor DNS maestro (tierra.sistema.test).
+ Este registro indica a otros servidores de correo electrónico que los correos dirigidos a @sistema.test deben ser manejados por el servidor marte.sistema.test.
 @       IN      MX      10 marte.sistema.test.
 ## Comprobaciones
 
